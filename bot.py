@@ -29,20 +29,11 @@ def main():
     devman_token = os.environ['DEVMAN_TOKEN']
     bot_token = os.environ['TG_BOT_TOKEN']
     headers = {'Authorization': f'Token {devman_token}'}
-    parser = argparse.ArgumentParser(
-        description='''Бот для отправки результата проверки работ.''')
-    parser.add_argument('chat_id',
-                        default=1,
-                        type=int,
-                        help='Введите номер id вашего телеграма.'
-                        'Узнать можно здесь: https://telegram.me/userinfobot',
-                        )
-    args = parser.parse_args()
-    chat_id = args.chat_id
+    chat_id = os.environ['CHAT_ID']
     bot = telegram.Bot(token=bot_token)
     bot.logger.addHandler(TelegramLogsHandler(bot, chat_id))
     bot.logger.warning('Бот запущен')
-    timestamp = int(time.time())
+    timestamp = ''
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     while True:

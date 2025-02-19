@@ -24,10 +24,12 @@ pip install -r requirements.txt
 
     DEVMAN_TOKEN=ваш_токен_разработчика_DVMN
     TG_BOT_TOKEN=ваш_токен_Telegram_бота
+    CHAT_ID=ващ_чат_айди
 
 ### Пример запуска проекта
+Для запуска пропишите:
 
-Если хотите получать уведомления о проверке работ в телеграм укажите ваш chat_id в окружении:
-
-    python bot.py 1
+```
+python bot.py
+```
 
