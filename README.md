@@ -33,3 +33,45 @@ pip install -r requirements.txt
 python bot.py
 ```
 
+## 🚀 Логирование и автоперезапуск
+
+Бот теперь умеет:
+
+- сохранять логи в файл `/opt/devman/DevmanCheckBot/bot.log`;
+- отправлять ошибки прямо в Telegram;
+- восстанавливаться после сбоев (благодаря `while True` и `try...except`);
+- работать как системный сервис в фоне.
+
+---
+
+## 🔄 Настройка автозапуска через systemd
+
+Создай новый сервис:
+
+```bash
+sudo nano /etc/systemd/system/devman-bot.service
+```
+Вставь содержимое
+```
+[Unit]
+Description=Devman Telegram Bot
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/devman/DevmanCheckBot/bot.py
+WorkingDirectory=/opt/devman/DevmanCheckBot
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+сохрани нажав Ctrl + O -> Enter -> Ctrl + X
+
+Запусти
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable devman-bot
+sudo systemctl start devman-bot
+
+```
